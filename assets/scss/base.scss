@@ -1,6 +1,7 @@
 @import '../../node_modules/coriolan-ui/tools/variables';
 @import 'variables';
 @import '../../node_modules/coriolan-ui/mixins/media';
+@import 'sentimony-ui';
 @import 'buttons';
 @import 'content';
 @import 'flex-sticky';
@@ -87,26 +88,4 @@ hr {
   border: solid rgba(#000,.3);
   border-width: 1px 0 0;
   margin: 1em 0;
-}
-
-// Sentimony UI
-.sen-fs11 {
-  font-size: 11px;
-}
-
-.sen-ml18 {
-  margin-left: 18px;
-}
-
-.sen-db {
-  display: block;
-}
-
-.small-info {
-  font-size: 10px;
-  color: rgba(#fff,.5);
-
-  @include media(S) {
-    font-size: 14px;
-  }
 }
