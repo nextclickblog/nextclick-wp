@@ -6,7 +6,9 @@
       <div class="page-artist__wrapper">
 
         <div class="page-artist__media">
+
           <app-cover
+            :cover_xl="artist.photo_xl"
             :cover="artist.photo"
             :category="'artists'"
             :slug="artist.slug"
@@ -14,6 +16,7 @@
           />
 
           <p v-if="artist.style" class="small-info">
+            Style:
             <span class="page-artist__style">{{ artist.style }}</span>
           </p>
           <h1 v-if="artist.title" class="page-artist__title">{{ artist.title }}</h1>
@@ -107,7 +110,14 @@
           :key="index"
           v-if="i.visible && i.artists.includes(artist.slug)"
         >
-          <span v-if="i.cover">
+          <span v-if="i.cover_xl">
+            <img style="width:11px;height:auto;"
+              :src="i.cover_xl"
+              :alt="i.title"
+            >
+            |
+          </span>
+          <span v-if="!i.cover_xl && i.cover">
             <img style="width:11px;height:auto;"
               :src="'https://content.sentimony.com/assets/img/releases/micro/' + i.slug + '.jpg'"
               :srcset="'https://content.sentimony.com/assets/img/releases/micro/' + i.slug + '.jpg 1x, https://content.sentimony.com/assets/img/releases/micro-retina/' + i.slug + '.jpg 2x'"
@@ -198,7 +208,7 @@
         title: this.artist.title,
         meta: [
           { name: 'description', content: this.artist.title + ' description' },
-          { property: 'og:image', content: 'https://content.sentimony.com/assets/img/artists/og-images/' + this.artist.slug + '.jpg' }
+          { property: 'og:image', content: this.artist.photo_og ? this.artist.photo_og : 'https://content.sentimony.com/assets/img/artists/og-images/' + this.artist.slug + '.jpg' }
         ]
       }
     }
