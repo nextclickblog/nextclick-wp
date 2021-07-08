@@ -1,27 +1,29 @@
 <template>
   <div class="page">
 
-    <h1>Releases</h1>
+    <h1>Dark Prog</h1>
+
+    <app-submenu/>
 
     <div class="list">
       <div class="item"
         v-for="(i, index) in sortByDate"
         :key="index"
-        v-if="i.visible"
+        v-if="i.visible && i.at_playlists.includes('dark-prog-zenonesque')"
       >
         <router-link v-ripple v-if="i.slug" :to="'/release/' + i.slug + '/'" class="item__link">
           <div class="item__wrapper">
             <div class="item__cover">
-              <img v-if="i.cover_th" class="item__img"
-                :src="i.cover_th"
+              <img v-if="i.cover_xl" class="item__img"
+                :src="i.cover_xl"
                 :alt="i.title + ' Small Thumbnail'"
               >
-              <img v-if="!i.cover_th && i.cover" class="item__img"
+              <img v-if="!i.cover_xl && i.cover" class="item__img"
                 :src="'https://content.sentimony.com/assets/img/releases/small/' + i.slug + '.jpg'"
                 :srcset="'https://content.sentimony.com/assets/img/releases/small/' + i.slug + '.jpg 1x, https://content.sentimony.com/assets/img/releases/small-retina/' + i.slug + '.jpg 2x'"
                 :alt="i.title + ' Small Thumbnail'"
               >
-              <div v-if="!i.cover_th && !i.cover"
+              <div v-if="!i.cover_xl && !i.cover"
                 class="item__soon" v-html="texts.comingArtwork"
               />
             </div>
@@ -32,7 +34,7 @@
         </router-link>
       </div>
     </div>
-
+    
   </div>
 </template>
 
@@ -40,8 +42,12 @@
   import axios from '~/plugins/axios'
   import sortBy from 'lodash/sortBy'
   import AppContent from '~/plugins/app-content'
+  import AppSubmenu from '~/components/AppSubmenu.vue'
 
   export default {
+    components: {
+      AppSubmenu,
+    },
     data () {
       return {
         texts: AppContent.texts,
